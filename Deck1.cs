@@ -33,7 +33,6 @@ public class Deck1 : MonoBehaviour
 
     public void Shuffle()
     {
-        // Standard array data swapping technique
 
         for (int i = cardFaces.Length - 1; i > 0; --i)
         {
