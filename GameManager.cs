@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public PlayerScript playerScript;
     public PlayerScript dealerScript;
 
-    // public Text to access and update - hud
+    
     public Text scoreText;
     public Text dealerScoreText;
     public Text betsText;
@@ -31,12 +31,12 @@ public class GameManager : MonoBehaviour
 
     // Card hiding dealer's 2nd card
     public GameObject hideCard;
-    // How much is bet
+    
     int pot = 0;
 
     void Start()
     {
-        // Add on click listeners to the buttons
+        
         dealBtn.onClick.AddListener(() => DealClicked());
         hitBtn.onClick.AddListener(() => HitClicked());
         standBtn.onClick.AddListener(() => StandClicked());
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
     private void DealClicked()
     {
-        // Reset round, hide text, prep for new hand
+        
         playerScript.ResetHand();
         dealerScript.ResetHand();
         // Hide deal hand score at start of deal
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     private void HitClicked()
     {
-        // Check that there is still room on the table
+        
         if (playerScript.cardIndex <= 10)
         {
             playerScript.GetCard();
@@ -105,16 +105,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Check for winnner and loser, hand is over
+    
     void RoundOver()
     {
-        // Booleans (true/false) for bust and blackjack/21
+        
         bool playerBust = playerScript.handValue > 21;
         bool dealerBust = dealerScript.handValue > 21;
         bool player21 = playerScript.handValue == 21;
         bool dealer21 = dealerScript.handValue == 21;
         pot = betClicked * 40;
-        // If stand has been clicked less than twice, no 21s or busts, quit function
         if (standClicks < 2 && !playerBust && !dealerBust && !player21 && !dealer21) return;
         bool roundOver = true;
         // All bust, bets returned
@@ -144,7 +143,7 @@ public class GameManager : MonoBehaviour
         {
             roundOver = false;
         }
-        // Set ui up for next move / hand / turn
+       
         if (roundOver)
         {
             hitBtn.gameObject.SetActive(false);
@@ -160,7 +159,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Add money to pot if bet clicked
+    
     void BetClicked()
     {
         Text newBet = betBtn.GetComponentInChildren(typeof(Text)) as Text;
